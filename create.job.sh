@@ -2,15 +2,18 @@
 
 dir=$(pwd)
 
-echo $dir
 
+sed 's/serghei/'$1'/g' run.sh>run.${1}.sh
+chmod 755 run.${1}.sh
 
-echo "executable=${dir}/reproduce.sh">job.txt
-echo "log                     = reproduce.log">>job.txt
-echo "output                  = reproduce.txt">>job.txt
-echo "error                   = reproduce.txt">>job.txt
-echo "request_memory=16G">>job.txt
-echo "request_cpus=1">>job.txt
-echo "queue 1">>job.txt
+echo "executable=${dir}/run.${1}.sh">job.${1}.txt
+
+echo "log                     = ${1}.log">>job.${1}.txt
+echo "output                  = ${1}.out">>job.${1}.txt
+echo "error                   = ${1}.error">>job.${1}.txt
+
+echo "request_memory=8G">>job.${1}.txt
+echo "request_cpus=1">>job.${1}.txt
+echo "queue 1">>job.${1}.txt
 
 
